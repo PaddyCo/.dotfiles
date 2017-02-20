@@ -1,15 +1,4 @@
-if has("win32")
-  language English_United States
-else
-  language en_US.UTF-8
-endif
-
-if has("gui_running")
-  " Turn of GVIm toolbar and menu
-  set guioptions-=m  "menu bar
-  set guioptions-=T  "toolbar
-  set guioptions-=r  "scrollbar
-endif
+language en_US.UTF-8
 
 set mouse="" " Disable mouse integration
 
@@ -97,6 +86,18 @@ map <silent> <CR> :noh<CR>
 " Remove trailing white space on save
 autocmd BufWritePre * %s/\s\+$//e
 
+" FZF
+fun! FzfOmniFiles()
+  let is_git = system('git status')
+  if v:shell_error
+    :Files
+  else
+    :GitFiles -o -c
+  endif
+endfun
+
+nnoremap <C-p> :call FzfOmniFiles()<cr>
+
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
 
@@ -126,12 +127,6 @@ Plug 'neomake/neomake'
 Plug 'moll/vim-bbye'
   :nnoremap <Leader>q :Bdelete<CR>
 
-" Add file searching like in sublime, bound to Ctrl-P
-Plug 'ctrlpvim/ctrlp.vim'
-  let g:ctrlp_map = '<c-p>'
-  let g:ctrlp_cmd = 'CtrlP'
-  let g:ctrlp_working_path_mode = 'rw'
-
 " Add all file search like in sublime, bound to Ctrl-Shift-F
 Plug 'dyng/ctrlsf.vim'
   map <C-S-f> :CtrlSF
@@ -156,7 +151,7 @@ Plug 'scrooloose/nerdtree'
   autocmd StdinReadPre * let s:std_in=1
   autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
   " - Make it so it sets CWD when navigating using the tree
-  "   this is to help ctrlp to search in the correct directory
+  "   this is to help fzf to search in the correct directory
   let g:NERDTreeChDirMode = 2
   let NERDTreeShowHidden=1
   " - Bind to hide/show the tree)
@@ -188,6 +183,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'blueyed/vim-diminactive'
 
 Plug 'christoomey/vim-tmux-navigator'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " Setup theme

@@ -70,6 +70,10 @@ export LANG=en_US.UTF-8
 # fi
 export EDITOR='nvim'
 
+# FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_TMUX=1
+export FZF_TMUX_HEIGHT=20%
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -85,3 +89,4 @@ export EDITOR='nvim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ll='ls -la'
+
