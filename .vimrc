@@ -92,7 +92,7 @@ fun! FzfOmniFiles()
   if v:shell_error
     :Files
   else
-    :GitFiles -o -c
+    :GitFiles -o -c --exclude-standard
   endif
 endfun
 

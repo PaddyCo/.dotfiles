@@ -7,6 +7,7 @@ echo "Symlinking dot files~! <3"
 mkdir -p ~/.oh-my-zsh/themes
 ln -s $DIR/lain.zsh-theme ~/.oh-my-zsh/themes/lain.zsh-theme
 ln -s $DIR/.zshrc ~/.zshrc
+git clone git://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 echo "zsh configured!"
 
 # Tmux
