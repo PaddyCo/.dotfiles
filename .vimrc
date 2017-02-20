@@ -146,6 +146,7 @@ Plug 'tpope/vim-rails'
 
 Plug 'tpope/vim-repeat'
 
+Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
   " - Make sure it opens automatically when opening a directory with vim
   autocmd StdinReadPre * let s:std_in=1
