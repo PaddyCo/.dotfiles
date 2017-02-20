@@ -56,9 +56,9 @@ nmap <C-j> :TmuxNavigateDown<cr>
 nmap <C-k> :TmuxNavigateUp<cr>
 nmap <C-h> :TmuxNavigateLeft<cr>
 nmap <C-l> :TmuxNavigateRight<cr>
-" - Fix for nvim where Ctrl-j doesn't work correctly
+" - Fix for nvim where Ctrl-h doesn't work correctly
 if has('nvim')
-  nmap <BS> <C-W>h
+  nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 endif
 
 " Command for creating file relative to current file
@@ -182,6 +182,8 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
 
 Plug 'blueyed/vim-diminactive'
+  let g:diminactive_enable_focus = 1 " Dim window if onfocused in tmux for example
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 Plug 'christoomey/vim-tmux-navigator'
 

@@ -1,5 +1,4 @@
 # vim: ft=tmux
 splitw -h -p 25 -t 0
 splitw -v -p 50 -t 1
-selectw -t 0
 selectp -t 0
