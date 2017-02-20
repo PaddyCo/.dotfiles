@@ -1,21 +1,23 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo -e "\e[95mSymlinking dot files~! <3\e[39m"
+echo "Symlinking dot files~! <3"
 
 # Zsh
-mkdir ~/.oh-my-zsh/themes -p
-ln $DIR/lain.zsh-theme ~/.oh-my-zsh/themes/lain.zsh-theme
-ln $DIR/.zshrc ~/.zshrc -s
-echo -e "\e[92mzsh configured!\e[39m"
+mkdir -p ~/.oh-my-zsh/themes
+ln -s $DIR/lain.zsh-theme ~/.oh-my-zsh/themes/lain.zsh-theme
+ln -s $DIR/.zshrc ~/.zshrc
+echo "zsh configured!"
 
 # Tmux
-ln $DIR/.tmux.conf ~/.tmux.conf
-echo -e "\e[92mtmux configured!\e[39m"
+mkdir -p ~/.tmux
+ln -s $DIR/.tmux.conf ~/.tmux.conf
+ln -s $DIR/.tmux/session ~/.tmux/session
+echo "tmux configured!"
 
 # Nvim
-mkdir ~/.config/nvim/ -p
-ln $DIR/.vimrc ~/.config/nvim/init.vim -s
+mkdir -p ~/.config/nvim/
+ln -s $DIR/.vimrc ~/.config/nvim/init.vim
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 echo "vim-plug installed!"
-echo -e "\e[92mneovim configured!\e[39m"
+echo "neovim configured!"

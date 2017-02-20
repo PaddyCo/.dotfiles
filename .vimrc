@@ -63,10 +63,10 @@ vnoremap <S-j> :m '>+1<CR>gv
 vnoremap <S-k> :m '<-2<CR>gv
 
 " Pane keys
-nmap <C-j> <C-W>j
-nmap <C-k> <C-W>k
-nmap <C-h> <C-W>h
-nmap <C-l> <C-W>l
+nmap <C-j> :TmuxNavigateDown<cr>
+nmap <C-k> :TmuxNavigateUp<cr>
+nmap <C-h> :TmuxNavigateLeft<cr>
+nmap <C-l> :TmuxNavigateRight<cr>
 " - Fix for nvim where Ctrl-j doesn't work correctly
 if has('nvim')
   nmap <BS> <C-W>h
@@ -107,7 +107,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Use Molokai as the theme
-Plug 'mhartington/oceanic-next'
+Plug 'dracula/vim'
 
 " Polyglot loads language support on demand
 Plug 'sheerun/vim-polyglot'
@@ -186,6 +186,8 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
 
 Plug 'blueyed/vim-diminactive'
+
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 " Setup theme
@@ -194,4 +196,4 @@ if (has("termguicolors"))
 endif
 
 syntax enable
-colorscheme OceanicNext
+colorscheme Dracula
