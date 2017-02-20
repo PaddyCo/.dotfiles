@@ -1,3 +1,4 @@
 #!/bin/bash
-
-brew install git ack tmux neovim/neovim/neovim reattach-to-user-namespace
+brew install python git ack tmux neovim/neovim/neovim reattach-to-user-namespace
+sudo easy_install pip
+pip install powerline-status
