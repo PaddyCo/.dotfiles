@@ -13,7 +13,7 @@ echo "zsh configured!"
 # Tmux
 mkdir -p ~/.tmux
 ln -s $DIR/.tmux.conf ~/.tmux.conf
-ln -s $DIR/.tmux/session ~/.tmux/session
+ln -s $DIR/.tmux/* ~/.tmux/
 echo "tmux configured!"
 
 # Nvim
