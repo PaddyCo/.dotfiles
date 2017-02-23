@@ -148,9 +148,6 @@ Plug 'tpope/vim-repeat'
 
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-  " - Make sure it opens automatically when opening a directory with vim
-  autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
   " - Make it so it sets CWD when navigating using the tree
   "   this is to help fzf to search in the correct directory
   let g:NERDTreeChDirMode = 2
