@@ -15,9 +15,11 @@ end
 " Stop VIM from suspending on Ctrl+Z
 nnoremap <c-z> <nop>
 
+" Lazy devs, lazy redraws
+set lazyredraw
 " Highlight cursor position
 set cursorline
-set cursorcolumn
+"set cursorcolumn
 
 " Disable line wrapping
 set nowrap
@@ -129,7 +131,7 @@ Plug 'moll/vim-bbye'
 
 " Add all file search like in sublime, bound to Ctrl-Shift-F
 Plug 'dyng/ctrlsf.vim'
-  map <C-S-f> :CtrlSF
+  map <C-S-f> :CtrlSF<Space>
   let g:ctrlsf_default_root = 'cwd'
 
 Plug 'godlygeek/tabular'
@@ -143,7 +145,6 @@ Plug 'ludovicchabant/vim-gutentags'
   let g:gutentags_cache_dir = '~/.tags_cache'
 
 Plug 'tpope/vim-rails'
-
 Plug 'tpope/vim-repeat'
 
 Plug 'scrooloose/nerdcommenter'
@@ -170,6 +171,9 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-eunuch'
 
 Plug 'majutsushi/tagbar'
+  let g:tagbar_left = 1
+  let g:tagbar_autofocus = 1
+  let g:tagbar_autoclose = 1
   nmap <F8> :TagbarToggle<CR>
 
 Plug 'airblade/vim-gitgutter'
