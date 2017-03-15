@@ -1,0 +1,51 @@
+# React snippets
+snippet rfc "React functional component skeleton" b
+const ${1:`!v expand('%:t:r')`} = (${2:props}) => {
+	return (
+		<p>$1</p>
+	);
+};
+endsnippet
+
+snippet rc "React class skeleton" b
+class ${1:`!v expand('%:t:r')`} extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+			<p>$1</p>
+		);
+  }
+}
+endsnippet
+
+snippet rpt "React prop type validation" b
+${1:`!v expand('%:t:r')`}.propTypes = {
+
+};
+endsnippet
+
+# ES6 snippets
+snippet exd "Export default" b
+export default ${1:`!v expand('%:t:r')`};
+endsnippet
+
+snippet map "Map"
+${1:objects}.map((${2:o}) => {
+	return $2$3;
+});
+endsnippet
+
+snippet im "Import javascript module" b
+import $1 from "$2${3:$1}";
+endsnippet
+
+snippet imr "Import react" b
+import React from "react";
+endsnippet
+
+snippet imm "Import moment.js" b
+import moment from "moment"
+endsnippet

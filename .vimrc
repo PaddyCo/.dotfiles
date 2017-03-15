@@ -5,6 +5,8 @@ set mouse="" " Disable mouse integration
 " Set title of terminal to reflect current file
 set title
 
+set runtimepath+=~/.dotfiles
+
 " Make it so yank also copies to the system clipboard.
 if has("win32")
   set clipboard=unnamed
@@ -19,7 +21,10 @@ nnoremap <c-z> <nop>
 set lazyredraw
 " Highlight cursor position
 set cursorline
-"set cursorcolumn
+
+" Folding
+set foldmethod=syntax
+set foldlevelstart=99
 
 " Disable line wrapping
 set nowrap
@@ -35,9 +40,6 @@ set expandtab
 set shiftwidth=2
 " - Enable backwards tabbing with shift-tab
 inoremap <S-Tab> <C-d>
-" - Enable indenting with tab in normal mode
-nmap <Tab> a<C-t><Esc>
-nmap <S-Tab> a<C-d><Esc>
 
 " Leader keys
 let g:mapleader=','
@@ -103,11 +105,20 @@ nnoremap <C-p> :call FzfOmniFiles()<cr>
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
 
-" Use Deoplete for basic autocompletion:
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  let g:deoplete#enable_at_startup = 1
-  " use tab for completion
-  inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" YouCompleteMe for auto completion
+Plug 'Valloric/YouCompleteMe'
+  let g:ycm_autoclose_preview_window_after_completion = 1
+  let g:ycm_autoclose_preview_window_after_insertion = 1
+  let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+" Ultisnips for snippet management
+Plug 'SirVer/ultisnips'
+  let g:UltiSnipsEditSplit="vertical"
+  let g:UltiSnipsExpandTrigger="<c-Space>"
+  let g:UltiSnipsJumpForwardTrigger="<Enter>"
+  let g:UltiSnipsJumpBackwardTrigger="<s-Enter>"
+  let g:UltiSnipsSnippetsDir="~/.dotfiles/ultisnips"
+  let g:UltiSnipsSnippetDirectories=["ultisnips"]
+Plug 'honza/vim-snippets'
 
 " Use Molokai as the theme
 Plug 'dracula/vim'
