@@ -92,4 +92,4 @@ export FZF_TMUX_HEIGHT=20%
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ll='ls -la'
-
+alias be='bundle exec'
