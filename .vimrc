@@ -17,6 +17,9 @@ set mouse="" " Disable mouse integration
 " Set title of terminal to reflect current file
 set title
 
+" Make sure backspace worsk like I want
+set backspace=indent,eol,start
+
 set runtimepath+=~/.dotfiles
 
 " Make it so yank also copies to the system clipboard.
