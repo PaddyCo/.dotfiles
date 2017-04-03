@@ -27,6 +27,18 @@ ${1:`!v expand('%:t:r')`}.propTypes = {
 };
 endsnippet
 
+# Jest snippets
+snippet it "Jest it block" b
+it("${1}", () => {
+	expect(true).toEqual(true);
+});
+endsnippet
+
+snippet desc "Jest describe block" b
+describe("${1}", () => {
+
+});
+endsnippet
 # ES6 snippets
 snippet exd "Export default" b
 export default ${1:`!v expand('%:t:r')`};
