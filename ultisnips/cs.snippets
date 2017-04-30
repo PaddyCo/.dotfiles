@@ -1,0 +1,22 @@
+snippet class "class skeleton" b
+public class ${1:`!v expand('%:t:r')`} {
+
+}
+endsnippet
+
+snippet mono "MonoBehaviour class skeleton" b
+using UnityEngine;
+
+public class ${1:`!v expand('%:t:r')`} : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+
+	}
+
+	// Update is called once per frame
+	void Update () {
+
+	}
+}
+endsnippet

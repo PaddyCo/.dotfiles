@@ -1,9 +1,24 @@
-language en_US.UTF-8
+if has("win32")
+  language English_United States
+  set guifont=Droid\ Sans\ Mono\ for\ Powerline:h10:cANSI
+else
+  language en_US.UTF-8
+endif
+
+" Turn of GVIm toolbar and menu
+if has("gui_running")
+  set guioptions-=m  "menu bar
+  set guioptions-=T  "toolbar
+  set guioptions-=r  "scrollbar
+endif
 
 set mouse="" " Disable mouse integration
 
 " Set title of terminal to reflect current file
 set title
+
+" Make sure backspace worsk like I want
+set backspace=indent,eol,start
 
 set runtimepath+=~/.dotfiles
 
