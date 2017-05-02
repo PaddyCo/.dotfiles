@@ -135,8 +135,8 @@ Plug 'SirVer/ultisnips'
   let g:UltiSnipsSnippetDirectories=["ultisnips"]
 Plug 'honza/vim-snippets'
 
-" Use Molokai as the theme
-Plug 'dracula/vim'
+" Theme
+Plug 'Svampson/vim-monokai'
 
 " Polyglot loads language support on demand
 Plug 'sheerun/vim-polyglot'
@@ -224,4 +224,4 @@ if (has("termguicolors"))
 endif
 
 syntax enable
-colorscheme Dracula
+colorscheme monokai
