@@ -145,11 +145,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'powerman/vim-plugin-AnsiEsc'
 
 " Execute code checks and find errors and issues with code.
-Plug 'neomake/neomake'
-  " Run neomake on save
-  augroup localneomake
-    autocmd! BufWritePost * Neomake
-  augroup END
+Plug 'w0rp/ale'
 
 " Make it easier to close files (buffers) without messing up window setup
 Plug 'moll/vim-bbye'
@@ -216,6 +212,11 @@ Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+Plug 'flowtype/vim-flow'
+  let g:flow#enable = 0
+
+Plug 'Galooshi/import-js'
 call plug#end()
 
 " Setup theme
