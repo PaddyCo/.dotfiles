@@ -21,6 +21,25 @@ class ${1:`!v expand('%:t:r')`} extends React.Component {
 }
 endsnippet
 
+snippet rnfc "React Native functional component skeleton" b
+// @flow
+import React from "react";
+
+import { Text } from "react-native"
+
+type propTypes = {
+
+}
+
+const ${1:`!v expand('%:t:r')`} = ({}: propTypes) => {
+	return (
+		<Text>$1</Text>
+	);
+};
+
+export default ${1:`!v expand('%:t:r')`};
+endsnippet
+
 snippet rpt "React prop type validation" b
 ${1:`!v expand('%:t:r')`}.propTypes = {
 
