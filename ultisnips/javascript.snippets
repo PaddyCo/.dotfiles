@@ -23,9 +23,9 @@ endsnippet
 
 snippet rnfc "React Native functional component skeleton" b
 // @flow
-import React from "react";
 
-import { Text } from "react-native"
+import React from "react";
+import { Text } from "react-native";
 
 type propTypes = {
 
@@ -36,6 +36,31 @@ const ${1:`!v expand('%:t:r')`} = ({}: propTypes) => {
 		<Text>$1</Text>
 	);
 };
+
+export default ${1:`!v expand('%:t:r')`};
+endsnippet
+
+snippet rnc "React Native component skeleton" b
+// @flow
+
+import React from "react";
+import { StyleSheet, Text } from "react-native";
+
+class ${1:`!v expand('%:t:r')`} extends React.Component {
+	props: {
+
+	}
+
+	render() {
+		return (
+			<Text>$1</Text>
+		);
+	}
+}
+
+const styles = StyleSheet.create({
+
+});
 
 export default ${1:`!v expand('%:t:r')`};
 endsnippet
