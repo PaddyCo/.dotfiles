@@ -204,6 +204,8 @@ Plug 'tpope/vim-abolish'
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'slim-template/vim-slim'
+
 Plug 'blueyed/vim-diminactive'
   let g:diminactive_enable_focus = 1 " Dim window if onfocused in tmux for example
 Plug 'tmux-plugins/vim-tmux-focus-events'

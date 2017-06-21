@@ -1,0 +1,17 @@
+atom-text-editor {
+  // Make cursor pink-ish because why not! (Because it looks sick)
+  .cursor {
+    border-color: #ff05ba;
+    border-width: 2px;
+  }
+}
+
+.syntax--comment {
+    color: #ff05ba; // Make comments more visible
+}
+
+atom-pane:not(.active) {
+  atom-text-editor {
+    background-color: #333; // Dim inactive panels
+  }
+}

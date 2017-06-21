@@ -23,4 +23,10 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.g
 echo "vim-plug installed!"
 echo "neovim configured!"
 
+# Atom
+mkdir -p ~/.atom/
+ln -s $DIR/atom/* ~/.atom/
+echo "Atom configured"
+echo "To install atom packages, run `apm install` in ~/.atom"
+
 git config --global core.excludesfile $DIR/.gitignore_global

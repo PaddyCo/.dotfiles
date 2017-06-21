@@ -1,0 +1,24 @@
+"*":
+  core:
+    allowPendingPaneItems: false
+    projectHome: "/Users/patrik/Projects"
+    restorePreviousWindowsOnStart: "no"
+    telemetryConsent: "no"
+    themes: [
+      "one-dark-ui"
+      "monokai"
+    ]
+  editor:
+    fontSize: 12
+  "exception-reporting":
+    userId: "6db54cba-07b0-4e9a-a3f5-b471a9ee0266"
+  "gruvbox-plus-syntax":
+    contrast: "Soft"
+  "linter-ui-default": {}
+  "vim-mode-plus":
+    useSmartcaseForSearch: true
+    useSmartcaseForSearchCurrentWord: true
+  welcome:
+    showOnStartup: false
+  zentabs:
+    maximumOpenedTabs: 1
