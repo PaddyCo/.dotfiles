@@ -136,7 +136,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Theme
-Plug 'Svampson/vim-monokai'
+Plug 'morhetz/gruvbox'
 
 " Polyglot loads language support on demand
 Plug 'sheerun/vim-polyglot'
@@ -206,8 +206,6 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'slim-template/vim-slim'
 
-Plug 'blueyed/vim-diminactive'
-  let g:diminactive_enable_focus = 1 " Dim window if onfocused in tmux for example
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
 Plug 'christoomey/vim-tmux-navigator'
@@ -227,4 +225,5 @@ if (has("termguicolors"))
 endif
 
 syntax enable
-colorscheme monokai
+set background=dark
+colorscheme gruvbox
