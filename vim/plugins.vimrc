@@ -51,6 +51,9 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 
+" Syntax checking
+Plug 'vim-syntastic/syntastic'
+
 " Theme plugin
 Plug 'morhetz/gruvbox'
 call plug#end()

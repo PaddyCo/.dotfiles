@@ -44,9 +44,6 @@ set smartcase
 " - nicer incremental search
 set inccommand=nosplit
 
-" Relative line numbers
-set number relativenumber
-
 " Indentation
 " - by default, the indent is 2 spaces.
 set shiftwidth=2
@@ -57,4 +54,3 @@ set expandtab
 " - Filetype specific indentation settings
 autocmd Filetype cs setlocal ts=4 sw=4 expandtab
 autocmd Filetype python setlocal ts=4 sw=4 expandtab
-
