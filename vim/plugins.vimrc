@@ -7,6 +7,29 @@ Plug 'christoomey/vim-tmux-navigator'
 " Adds some good commands like :Move and :Rename
 Plug 'tpope/vim-eunuch'
 
+" Syntax for a ton of languages
+Plug 'sheerun/vim-polyglot'
+
+" Git plugins
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+" Detect whitespace settings
+Plug 'tpope/vim-sleuth'
+
+" Snippets manager
+Plug 'SirVer/ultisnips'
+
+" Deoplete for all completions
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
 " Very good file search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -47,9 +70,8 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-highlightedyank'
   let g:highlightedyank_highlight_duration = 200
 
-" Vim note taking
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
+" Indent guides
+Plug 'Yggdroot/indentLine'
 
 " Syntax checking
 Plug 'vim-syntastic/syntastic'

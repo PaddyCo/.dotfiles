@@ -16,9 +16,6 @@ set title
 " Disable mouse integration
 set mouse=""
 
-" Show invisible characters (tabs etc)
-set list
-
 " Highlight cursor position
 set cursorline
 set cursorcolumn
@@ -31,6 +28,9 @@ set noswapfile
 
 " No wrapping
 set nowrap
+
+" Folding
+set foldmethod=syntax
 
 " Searching
 " - Highlight search results
@@ -45,11 +45,7 @@ set smartcase
 set inccommand=nosplit
 
 " Indentation
-" - by default, the indent is 2 spaces.
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set expandtab
+set tabstop=4
 
 " - Filetype specific indentation settings
 autocmd Filetype cs setlocal ts=4 sw=4 expandtab
