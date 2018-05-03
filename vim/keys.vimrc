@@ -17,8 +17,13 @@ nnoremap <S-k> :m .-2<CR>
 vnoremap <S-j> :m '>+1<CR>gv
 vnoremap <S-k> :m '<-2<CR>gv
 
-" CTRL-P to search files in CWD
-nnoremap <C-p> :call FzfOmniFiles()<cr>
+if exists("g:gui_oni")
+  " CTRL-P to open Oni file search
+  nnoremap <C-p> :call OniCommand("quickOpen.show")<cr>
+else
+  " CTRL-P to search files in CWD
+  nnoremap <C-p> :call FzfOmniFiles()<cr>
+endif
 
 " CTRL-SHIFT-F to search file contents in CWD
 map <C-S-f> :CtrlSF<Space>

@@ -29,9 +29,6 @@ set noswapfile
 " No wrapping
 set nowrap
 
-" Folding
-set foldmethod=syntax
-
 " Searching
 " - Highlight search results
 set hlsearch

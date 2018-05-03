@@ -18,7 +18,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sleuth'
 
 " Snippets manager
-Plug 'SirVer/ultisnips'
+if !exists("g:gui_oni")
+  Plug 'SirVer/ultisnips'
+endif
 
 " Deoplete for all completions
 if has('nvim')
@@ -31,16 +33,18 @@ endif
 let g:deoplete#enable_at_startup = 1
 
 " Very good file search
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-fun! FzfOmniFiles()
-  let is_git = system('git status')
-  if v:shell_error
-    :Files
-  else
-    :GitFiles -o -c --exclude-standard
-  endif
-endfun
+if !exists("g:gui_oni")
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  fun! FzfOmniFiles()
+    let is_git = system('git status')
+    if v:shell_error
+      :Files
+    else
+      :GitFiles -o -c --exclude-standard
+    endif
+  endfun
+endif
 
 " Easy motion
 Plug 'easymotion/vim-easymotion'
@@ -70,11 +74,21 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-highlightedyank'
   let g:highlightedyank_highlight_duration = 200
 
-" Indent guides
-Plug 'Yggdroot/indentLine'
+" Typescript
+if !exists("g:gui_oni")
+  Plug 'leafgarland/typescript-vim'
+endif
 
-" Syntax checking
-Plug 'vim-syntastic/syntastic'
+" Plugin for TS autocompletion
+if !exists("g:gui_oni")
+  Plug 'Quramy/tsuquyomi'
+  Plug 'Shougo/vimproc.vim'
+endif
+
+" Ale for linting
+if !exists("g:gui_oni")
+  Plug 'w0rp/ale'
+endif
 
 " Theme plugin
 Plug 'morhetz/gruvbox'
