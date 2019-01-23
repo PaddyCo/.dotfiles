@@ -75,19 +75,31 @@ Plug 'machakann/vim-highlightedyank'
   let g:highlightedyank_highlight_duration = 200
 
 " Typescript
-if !exists("g:gui_oni")
-  Plug 'leafgarland/typescript-vim'
-endif
-
-" Plugin for TS autocompletion
-if !exists("g:gui_oni")
-  Plug 'Quramy/tsuquyomi'
-  Plug 'Shougo/vimproc.vim'
-endif
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+" - Plugin for TS autocompletion
+Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
+Plug 'Shougo/vimproc.vim', { 'for': 'typescript' }
 
 " Ale for linting
-if !exists("g:gui_oni")
-  Plug 'w0rp/ale'
+Plug 'w0rp/ale'
+
+" Autoformat
+Plug 'Chiel92/vim-autoformat'
+
+" Neomake
+Plug 'neomake/neomake', { 'for': 'rust' }
+au BufWritePost *.rs Neomake
+
+" Rust
+if executable('rustc')
+  Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+  Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+  set hidden
+  let g:racer_cmd = "/home/patrik/.cargo/bin/racer"
+  let g:racer_experimental_completer = 1
+  au FileType rust nmap <leader>gx <Plug>(rust-doc)
+  au FileType rust nmap <leader>gd <Plug>(rust-def)
+  au FileType rust nmap <leader>gs <Plug>(rust-def-split)
 endif
 
 " Theme plugin
