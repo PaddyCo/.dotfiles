@@ -2,7 +2,7 @@
 if has("win32")
   set clipboard=unnamed
 else
-  set clipboard=unnamedplus
+  set clipboard+=unnamedplus
 end
 
 let g:netrw_keepdir=0
@@ -47,3 +47,6 @@ set tabstop=4
 " - Filetype specific indentation settings
 autocmd Filetype cs setlocal ts=4 sw=4 expandtab
 autocmd Filetype python setlocal ts=4 sw=4 expandtab
+
+" Autoformat
+au BufWrite *.rs :Autoformat
