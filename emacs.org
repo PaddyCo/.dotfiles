@@ -137,38 +137,7 @@ This is my personal Emacs configuration file
       (bind-key "<backtab>" #'dired-subtree-cycle dired-mode-map)
     #+END_SRC
 
-* General
-** Helm
-  [[https://github.com/emacs-helm/helm][Helm]] is the emacs incremental completion and selection narrowing framework
-  In other words it's a very good fuzzy finder that can be used pretty much everywhere in emacs!
-  
-*** Packages
-   Install the packages
-
-   #+BEGIN_SRC emacs-lisp
-   (use-package helm :ensure t) ; Main helm
-   #+END_SRC
-
-*** Keybindings
-   Helm
-   #+BEGIN_SRC emacs-lisp
-   (global-set-key (kbd "M-x") 'helm-M-x)
-   #+END_SRC
-
-*** General
-   Always open helm in the bottom of the frame
-   #+BEGIN_SRC emacs-lisp
-   (setq helm-default-display-buffer-functions '(display-buffer-in-side-window))
-   #+END_SRC
-
-** Keybindings
-   Unbind keys that interefers with the shortcut keys for swedish characters in OSX
-   #+BEGIN_SRC emacs-lisp
-   (global-unset-key (kbd "M-a"))
-   (global-unset-key (kbd "M-u"))
-   #+END_SRC
-
-* Text manipulation
+* Evil
 ** Evil
   [[https://github.com/emacs-evil/evil][Evil]] is The extensible vi layer for Emacs
   
@@ -177,7 +146,6 @@ This is my personal Emacs configuration file
 
    #+BEGIN_SRC emacs-lisp
    (use-package evil :ensure t)
-   (require 'evil)
    #+END_SRC
 
 *** Configuration
@@ -193,6 +161,18 @@ This is my personal Emacs configuration file
     (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up) 
     #+END_SRC
 
+** Leader key
+   #+BEGIN_SRC emacs-lisp
+   ;; Create the leader keymap
+   (defvar paddy-leader-map (make-sparse-keymap)
+     "Keymap for \"leader key\" shortcuts.")
+   
+   ;; Bind the leader key
+   (define-key evil-normal-state-map "," paddy-leader-map)
+   #+END_SRC
+   
+   To bind something to the leader map, you can now do something like this:
+   =(define-key paddy-leader-map "b" 'list-buffers)=
 ** evil-easymotion
    Easymotion for Evil mode
    
@@ -204,6 +184,49 @@ This is my personal Emacs configuration file
 *** Keybindings
    #+BEGIN_SRC emacs-lisp
    (evilem-default-keybindings "SPC")
+   #+END_SRC
+
+* General
+** Helm
+*** Packages
+   Install the packages
+
+   #+BEGIN_SRC emacs-lisp
+   (use-package helm :ensure t) ; Main helm
+   #+END_SRC
+
+*** Keybindings
+   #+BEGIN_SRC emacs-lisp
+   (global-set-key (kbd "M-x") 'helm-M-x)
+   #+END_SRC
+
+*** General
+   Always open helm in the bottom of the frame
+   #+BEGIN_SRC emacs-lisp
+   (setq helm-default-display-buffer-functions '(display-buffer-in-side-window))
+   #+END_SRC
+
+** Which-key
+   =which-key= is a minor mode for Emacs that displays the key bindings following your currently entered incomplete command (a prefix) in a popup.
+
+   #+BEGIN_SRC emacs-lisp
+   (use-package which-key :ensure t)
+   (which-key-mode) ; Activate which-key
+   #+END_SRC
+   
+** Keybindings
+   Unbind keys that interefers with the shortcut keys for swedish characters in OSX
+   #+BEGIN_SRC emacs-lisp
+   (global-unset-key (kbd "M-a"))
+   (global-unset-key (kbd "M-u"))
+   #+END_SRC
+   
+   Rebind prev/next buffer keys to use H/L instead of arrow keys
+   #+BEGIN_SRC emacs-lisp
+   (unbind-key "C-x h" global-map)
+   (unbind-key "C-x l" global-map)
+   (define-key evil-normal-state-map (kbd "C-x h") 'previous-buffer) 
+   (define-key evil-normal-state-map (kbd "C-x l") 'next-buffer) 
    #+END_SRC
 
 * File/Project management
@@ -225,9 +248,9 @@ This is my personal Emacs configuration file
 *** Keybindings
    Set keybindings for Projectile
    #+BEGIN_SRC emacs-lisp
-   (define-key projectile-mode-map (kbd "C-p") 'projectile-command-map)
-   (define-key projectile-mode-map (kbd "C-p f") 'helm-projectile-find-file)
-   (define-key projectile-mode-map (kbd "C-p p") 'helm-projectile-switch-project)
+   (define-key paddy-leader-map "p" 'projectile-command-map)
+   (define-key projectile-command-map "f" 'helm-projectile-find-file)
+   (define-key projectile-command-map "p" 'helm-projectile-switch-project)
    #+END_SRC
 
 *** Settings
@@ -247,7 +270,7 @@ This is my personal Emacs configuration file
 *** Keybindings
     Give magit a global hotkey
     #+BEGIN_SRC emacs-lisp
-    (global-set-key (kbd "C-x g") 'magit-status)
+    (define-key paddy-leader-map "g" 'magit-status)
     #+END_SRC
     
     Make it work better with Evil mode
@@ -257,6 +280,12 @@ This is my personal Emacs configuration file
     #+END_SRC
    
 * Org
+** Agenda
+   Load the org files in the designated org folder
+   
+   #+BEGIN_SRC emacs-lisp
+   (setq org-agenda-files '("~/Dropbox/Org"))
+   #+END_SRC
 ** Appearence
     [[https://github.com/sabof/org-bullets][org-bullets]] adds pretty bullets to org mode
 
