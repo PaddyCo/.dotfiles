@@ -3,6 +3,12 @@
 
 This is my personal Emacs configuration file
 
+* About running on Windows
+** Home
+   Emacs has some very strange defaults with regards to what it considers the Home directory on Windows, make sure to set the =HOME= to your user directory
+** Icons
+   When installing =all-the-icons= it will prompt for a font installation directory, pick whatever and then manually install the fonts it just downloaded
+
 * Init
 ** Package repositories
    Setup the default package repositories used by this config
