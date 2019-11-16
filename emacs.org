@@ -241,6 +241,19 @@ This is my personal Emacs configuration file
   #+BEGIN_SRC emacs-lisp
   (setq system-time-locale "C")
   #+END_SRC
+  
+  Save all auto save files to a single folder instead of polluting the project directory
+  #+BEGIN_SRC emacs-lisp
+  (setq backup-directory-alist
+          `((".*" . ,temporary-file-directory)))
+    (setq auto-save-file-name-transforms
+          `((".*" ,temporary-file-directory t)))
+  #+END_SRC
+  
+  Disable lockfiles
+  #+BEGIN_SRC emacs-lisp
+  (setq create-lockfiles nil)
+  #+END_SRC
 
 ** Helm
 *** Packages
@@ -318,6 +331,12 @@ This is my personal Emacs configuration file
     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
     #+END_SRC
 
+*** Configuration
+    #+BEGIN_SRC emacs-lisp
+    (setq org-log-into-drawer t)    
+    (setq org-log-done t)
+    #+END_SRC
+
 *** Export
 **** Html
    Htmlize allows for html export of org documents
@@ -336,7 +355,8 @@ This is my personal Emacs configuration file
       ("t" org-todo "Todo" :column "Todo")
       ("n" org-add-note "Add Note")
       ("c" hydra-clock/body "Clock")
-      ("q" org-set-tags-command "Tag")
+      ("T" org-set-tags-command "Tag")
+      ("A" org-archive-subtree-default "Archive")
       ("a" org-agenda "Agenda" :column "Schedule")
       ("s" org-schedule "Schedule")
       ("d" org-deadline "Deadline")
@@ -377,6 +397,7 @@ This is my personal Emacs configuration file
      ("q" nil "Quit" :column "Leader")
      ("x" helm-M-x "Execute command" :column "General")
      ("t" neotree-toggle "Filetree")
+     ("b" helm-buffers-list "Buffers list")
      ("g" hydra-magit/body "Git" :column "Menus")
      ("o" hydra-org/body "Org")
      ("p" hydra-projectile/body "Project")
