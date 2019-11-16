@@ -1,6 +1,5 @@
 #+TITLE: Emacs configuration
-#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-readtheorg.setup
-
+#+SETUPFILE: https://raw.githubusercontent.com/PaddyCo/org-html-themes/master/setup/theme-readtheorg.setup
 This is my personal Emacs configuration file
 
 * About running on Windows
@@ -8,6 +7,7 @@ This is my personal Emacs configuration file
    Emacs has some very strange defaults with regards to what it considers the Home directory on Windows, make sure to set the =HOME= to your user directory
 ** Icons
    When installing =all-the-icons= it will prompt for a font installation directory, pick whatever and then manually install the fonts it just downloaded
+
 
 * Init
 ** Package repositories
@@ -87,16 +87,33 @@ This is my personal Emacs configuration file
    #+END_SRC
 
 ** Theme
-   For the theme we are using zenburn
+   For the theme we are using one of the doom themes
    #+BEGIN_SRC emacs-lisp
-   (use-package zenburn-theme :ensure t)
-   (load-theme 'zenburn t)
+   (use-package doom-themes :ensure t)
+   (load-theme 'doom-Iosvkem t)
    #+END_SRC
    
-   Modify the appearance of highlighted text to make it actually readable
+   Configure the doom themes to work better with org
    #+BEGIN_SRC emacs-lisp
-   (set-face-attribute 'region nil :background "#333" :foreground "#ffffff")
+   (doom-themes-org-config)
    #+END_SRC
+
+** Solaire mode
+   Brightens source buffers and dims non-source buffers
+   
+   #+BEGIN_SRC emacs-lisp
+   (use-package solaire-mode
+     :ensure t
+     :hook
+     ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+     (minibuffer-setup . solaire-mode-in-minibuffer)
+     :config
+     (solaire-global-mode +1)
+     (solaire-mode-swap-bg))
+   #+END_SRC
+
+   #+RESULTS:
+   | solaire-mode-in-minibuffer | rfn-eshadow-setup-minibuffer | minibuffer-history-isearch-setup | minibuffer-history-initialize |
 
 ** Modeline 
    [[https://github.com/seagle0128/doom-modeline][doom-modeline]] is "A fancy and fast mode-line inspired by minimalism design"
@@ -106,36 +123,6 @@ This is my personal Emacs configuration file
      :ensure t
      :hook (after-init . doom-modeline-mode))
    #+END_SRC
-
-** Dired 
-*** Packages
-    Install plugins related to dired
-    #+BEGIN_SRC emacs-lisp
-    (use-package dired-subtree :ensure t
-      :after dired)
-    (use-package all-the-icons-dired :ensure t)
-    (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-    #+END_SRC
-
-*** General
-    Use emulated ls by default, so it is consistent between different OSes
-    #+BEGIN_SRC emacs-lisp
-    (setq ls-lisp-use-insert-directory-program nil)
-    #+END_SRC
-
-    Hide details by default
-    #+BEGIN_SRC emacs-lisp
-    (add-hook 'dired-mode-hook
-      (lambda ()
-        (dired-hide-details-mode) ; Hide details by default
-        ))
-    #+END_SRC
-
-*** Keybindings
-    #+BEGIN_SRC emacs-lisp
-      (bind-key "<tab>" #'dired-subtree-toggle dired-mode-map)
-      (bind-key "<backtab>" #'dired-subtree-cycle dired-mode-map)
-    #+END_SRC
 
 * Evil
 ** Evil
@@ -161,18 +148,6 @@ This is my personal Emacs configuration file
     (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up) 
     #+END_SRC
 
-** Leader key
-   #+BEGIN_SRC emacs-lisp
-   ;; Create the leader keymap
-   (defvar paddy-leader-map (make-sparse-keymap)
-     "Keymap for \"leader key\" shortcuts.")
-   
-   ;; Bind the leader key
-   (define-key evil-normal-state-map "," paddy-leader-map)
-   #+END_SRC
-   
-   To bind something to the leader map, you can now do something like this:
-   =(define-key paddy-leader-map "b" 'list-buffers)=
 ** evil-easymotion
    Easymotion for Evil mode
    
@@ -186,7 +161,87 @@ This is my personal Emacs configuration file
    (evilem-default-keybindings "SPC")
    #+END_SRC
 
+* File/Project management
+** Projectile
+   [[https://github.com/bbatsov/projectile][Projectile]] is a project interaction library for Emacs.
+
+*** Packages
+   Install package and enable Projectile
+   #+BEGIN_SRC emacs-lisp
+   (use-package projectile :ensure t)   
+   (projectile-mode +1)
+   #+END_SRC
+   
+   Install helm integration
+   #+BEGIN_SRC emacs-lisp
+   (use-package helm-projectile :ensure t)   
+   #+END_SRC
+
+*** Keymap
+    #+BEGIN_SRC emacs-lisp
+    (defhydra hydra-projectile (:color blue)
+      ("q" nil "Quit" :column "Projectile")
+      ("p" helm-projectile-switch-project "Switch project" :column "Manage")
+      ("f" helm-projectile-find-file "Find file" :column "Project"))
+    #+END_SRC
+*** Settings
+   With this setting, once you have selected your project, the top-level directory of the project is immediately opened for you in a dired buffer.
+   #+BEGIN_SRC emacs-lisp
+   (setq projectile-switch-project-action 'neotree-projectile-action)
+   #+END_SRC
+
+** Magit
+*** Packages
+    Install package
+    #+BEGIN_SRC emacs-lisp
+    (use-package magit :ensure t)   
+    (use-package evil-magit :ensure t)   
+    #+END_SRC
+
+*** Keymap
+    Setup a magit hydra
+
+    #+BEGIN_SRC emacs-lisp
+    (defhydra hydra-magit (:color blue)
+      ("q" nil "Quit" :column "Magit")
+      ("s" magit-status "Status" :column "Git")
+      ("b" magit-blame "Blame"))
+    #+END_SRC
+
+    Make it work better with Evil mode
+
+    #+BEGIN_SRC emacs-lisp
+    (setq evil-magit-state 'normal)
+    (setq evil-magit-use-y-for-yank t)
+    #+END_SRC
+   
+** Neotree
+   Neotree is a file explorer for Emacs
+   
+   #+BEGIN_SRC emacs-lisp
+   (use-package neotree :ensure t)
+
+   ;; Use icons
+   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+   
+   ;; Evil mode bindings
+   (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+   (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+   (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+   (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+   (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
+   (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
+   (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
+   (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
+   (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
+   #+END_SRC
+
 * General
+  Set the time locale so it uses english weekdays
+  #+BEGIN_SRC emacs-lisp
+  (setq system-time-locale "C")
+  #+END_SRC
+
 ** Helm
 *** Packages
    Install the packages
@@ -206,6 +261,10 @@ This is my personal Emacs configuration file
    (setq helm-default-display-buffer-functions '(display-buffer-in-side-window))
    #+END_SRC
 
+** Hydra
+   #+BEGIN_SRC emacs-lisp
+   (use-package hydra :ensure t)
+   #+END_SRC
 ** Which-key
    =which-key= is a minor mode for Emacs that displays the key bindings following your currently entered incomplete command (a prefix) in a popup.
 
@@ -228,65 +287,30 @@ This is my personal Emacs configuration file
    (define-key evil-normal-state-map (kbd "C-x h") 'previous-buffer) 
    (define-key evil-normal-state-map (kbd "C-x l") 'next-buffer) 
    #+END_SRC
-
-* File/Project management
-** Projectile
-   [[https://github.com/bbatsov/projectile][Projectile]] is a project interaction library for Emacs.
    
-*** Packages
-   Install package and enable Projectile
-   #+BEGIN_SRC emacs-lisp
-   (use-package projectile :ensure t)   
-   (projectile-mode +1)
-   #+END_SRC
-   
-   Install helm integration
-   #+BEGIN_SRC emacs-lisp
-   (use-package helm-projectile :ensure t)   
-   #+END_SRC
+* File formats
+** Org
+*** Evil
+  #+BEGIN_SRC emacs-lisp
+  (use-package evil-org
+  :ensure t
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+            (lambda ()
+              (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+  #+END_SRC
 
-*** Keybindings
-   Set keybindings for Projectile
-   #+BEGIN_SRC emacs-lisp
-   (define-key paddy-leader-map "p" 'projectile-command-map)
-   (define-key projectile-command-map "f" 'helm-projectile-find-file)
-   (define-key projectile-command-map "p" 'helm-projectile-switch-project)
-   #+END_SRC
-
-*** Settings
-   With this setting, once you have selected your project, the top-level directory of the project is immediately opened for you in a dired buffer.
-   #+BEGIN_SRC emacs-lisp
-   (setq projectile-switch-project-action #'projectile-dired)
-   #+END_SRC
-
-** Magit
-*** Packages
-    Install package
-    #+BEGIN_SRC emacs-lisp
-    (use-package magit :ensure t)   
-    (use-package evil-magit :ensure t)   
-    #+END_SRC
-
-*** Keybindings
-    Give magit a global hotkey
-    #+BEGIN_SRC emacs-lisp
-    (define-key paddy-leader-map "g" 'magit-status)
-    #+END_SRC
-    
-    Make it work better with Evil mode
-    #+BEGIN_SRC emacs-lisp
-    (setq evil-magit-state 'normal)
-    (setq evil-magit-use-y-for-yank t)
-    #+END_SRC
-   
-* Org
-** Agenda
+*** Agenda
    Load the org files in the designated org folder
    
    #+BEGIN_SRC emacs-lisp
    (setq org-agenda-files '("~/Dropbox/Org"))
    #+END_SRC
-** Appearence
+*** Appearence
     [[https://github.com/sabof/org-bullets][org-bullets]] adds pretty bullets to org mode
 
     #+BEGIN_SRC emacs-lisp
@@ -294,13 +318,73 @@ This is my personal Emacs configuration file
     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
     #+END_SRC
 
-** Export
-*** Html
+*** Export
+**** Html
    Htmlize allows for html export of org documents
 
    #+BEGIN_SRC emacs-lisp
    (use-package htmlize :ensure t)
    #+END_SRC
 
-   
-   
+*** Keymap
+    Setup a Org mode hydra
+
+    #+BEGIN_SRC emacs-lisp
+    ; Org hydra
+    (defhydra hydra-org (:color blue)
+      ("q" nil "Quit" :column "Org mode")
+      ("t" org-todo "Todo" :column "Todo")
+      ("n" org-add-note "Add Note")
+      ("c" hydra-clock/body "Clock")
+      ("q" org-set-tags-command "Tag")
+      ("a" org-agenda "Agenda" :column "Schedule")
+      ("s" org-schedule "Schedule")
+      ("d" org-deadline "Deadline")
+      ("e" org-export-dispatch "Export" :columnn "Misc")
+    )
+
+    ; Clock hydra
+    (defhydra hydra-clock (:color blue)
+      ("q" nil "Quit" :column "Org-Clock")
+      ("i" org-clock-in "In" :column "Task")
+      ("o" org-clock-out "Out")
+      ("j" org-clock-goto "Jump to current clock")
+      ("e" org-clock-modify-effort-estimate "Effort")
+      ("c" org-clock-cancel "Cancel" :color pink)
+      ("d" org-clock-display "Display" :column "Misc")
+      ("r" org-clock-report "Report"))
+    #+END_SRC
+
+    #+RESULTS:
+    : hydra-clock/body
+
+** Markdown
+   #+BEGIN_SRC emacs-lisp
+   (use-package markdown-mode
+     :ensure t
+     :commands (markdown-mode gfm-mode)
+     :mode (("README\\.md\\'" . gfm-mode)
+            ("\\.md\\'" . markdown-mode)
+            ("\\.markdown\\'" . markdown-mode))
+     :init (setq markdown-command "multimarkdown"))
+   #+END_SRC
+
+* Keymap
+  Creating the leader hydra
+
+  #+BEGIN_SRC emacs-lisp
+   (defhydra hydra-leader (:color blue)
+     ("q" nil "Quit" :column "Leader")
+     ("x" helm-M-x "Execute command" :column "General")
+     ("t" neotree-toggle "Filetree")
+     ("g" hydra-magit/body "Git" :column "Menus")
+     ("o" hydra-org/body "Org")
+     ("p" hydra-projectile/body "Project")
+   )
+  #+END_SRC
+
+  Bind leader hydra to leader key
+
+  #+BEGIN_SRC emacs-lisp
+  (define-key evil-normal-state-map "," 'hydra-leader/body)
+  #+END_SRC
