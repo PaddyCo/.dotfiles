@@ -324,35 +324,21 @@ This is my personal Emacs configuration file
    (setq org-agenda-files '("~/Dropbox/Org"))
    #+END_SRC
 
-   Custom agenda views
-   
-   #+BEGIN_SRC emacs-lisp
-   (setq org-agenda-custom-commands
-      '(
-         ("n" todo "NEXT")
-         ("w" todo "TODO|WAITING")
-        ;; ...other commands here
-       ))
-   #+END_SRC
-   
 *** Capture templates
-    
-#+END_SRC
     
     #+BEGIN_SRC emacs-lisp
     (setq org-capture-templates
       '(("t" "Todo" entry (file+headline "~/Dropbox/Org/home.org" "Capture")
-             "* TODO %^{Description}\n o  %?\n  :LOGBOOK:\n  - Added: %U\n  :END:")
+             "* TODO %^{Description}\n  -  %?\n  :LOGBOOK:\n  - Added: %U\n  :END:")
 	("d" "Daily task" checkitem (file+olp+datetree "~/Dropbox/Org/daily.org")
              "- [ ] %? %a %U")
-        ("j" "Journal" entry (file+olp+datetree "~/Dropbox/Org/journal.org")
-             "* %?\n  - Entered on %U\n  %i\n  %a")))
+        ("j" "Journal" item (file+olp+datetree "~/Dropbox/Org/journal.org")
+             "- %? %U")))
     #+END_SRC
 
     #+RESULTS:
     | t | Todo | entry | (file+headline ~/Dropbox/Org/home.org Capture) | * TODO %^{Description} |
    
-     
 *** Appearence
     [[https://github.com/sabof/org-bullets][org-bullets]] adds pretty bullets to org mode
 
