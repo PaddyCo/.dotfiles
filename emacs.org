@@ -323,6 +323,36 @@ This is my personal Emacs configuration file
    #+BEGIN_SRC emacs-lisp
    (setq org-agenda-files '("~/Dropbox/Org"))
    #+END_SRC
+
+   Custom agenda views
+   
+   #+BEGIN_SRC emacs-lisp
+   (setq org-agenda-custom-commands
+      '(
+         ("n" todo "NEXT")
+         ("w" todo "TODO|WAITING")
+        ;; ...other commands here
+       ))
+   #+END_SRC
+   
+*** Capture templates
+    
+#+END_SRC
+    
+    #+BEGIN_SRC emacs-lisp
+    (setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/Dropbox/Org/home.org" "Capture")
+             "* TODO %^{Description}\n o  %?\n  :LOGBOOK:\n  - Added: %U\n  :END:")
+	("d" "Daily task" checkitem (file+olp+datetree "~/Dropbox/Org/daily.org")
+             "- [ ] %? %a %U")
+        ("j" "Journal" entry (file+olp+datetree "~/Dropbox/Org/journal.org")
+             "* %?\n  - Entered on %U\n  %i\n  %a")))
+    #+END_SRC
+
+    #+RESULTS:
+    | t | Todo | entry | (file+headline ~/Dropbox/Org/home.org Capture) | * TODO %^{Description} |
+   
+     
 *** Appearence
     [[https://github.com/sabof/org-bullets][org-bullets]] adds pretty bullets to org mode
 
@@ -357,10 +387,13 @@ This is my personal Emacs configuration file
       ("c" hydra-clock/body "Clock")
       ("T" org-set-tags-command "Tag")
       ("A" org-archive-subtree-default "Archive")
+      ("p" org-capture "Capture" :column "Organizing")
+      ("r" org-refile "Refile")
       ("a" org-agenda "Agenda" :column "Schedule")
       ("s" org-schedule "Schedule")
       ("d" org-deadline "Deadline")
-      ("e" org-export-dispatch "Export" :columnn "Misc")
+      ("e" org-export-dispatch "Export" :column "Misc")
+      ("o" org-open-at-point "Follow link")
     )
 
     ; Clock hydra
@@ -374,9 +407,6 @@ This is my personal Emacs configuration file
       ("d" org-clock-display "Display" :column "Misc")
       ("r" org-clock-report "Report"))
     #+END_SRC
-
-    #+RESULTS:
-    : hydra-clock/body
 
 ** Markdown
    #+BEGIN_SRC emacs-lisp
