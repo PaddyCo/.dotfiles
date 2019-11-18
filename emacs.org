@@ -337,12 +337,11 @@ This is my personal Emacs configuration file
              "* TODO %^{Description}\n  -  %?\n  :LOGBOOK:\n  - Added: %U\n  :END:")
 	("d" "Daily task" checkitem (file+olp+datetree "~/Dropbox/Org/daily.org")
              "- [ ] %? %a %U")
+	("w" "Daily work task" checkitem (file+olp+datetree "~/Dropbox/Org/daily-work.org")
+             "- [ ] %? %a %U")
         ("j" "Journal" item (file+olp+datetree "~/Dropbox/Org/journal.org")
              "- %? %U")))
     #+END_SRC
-
-    #+RESULTS:
-    | t | Todo | entry | (file+headline ~/Dropbox/Org/home.org Capture) | * TODO %^{Description} |
    
 *** Appearence
     [[https://github.com/sabof/org-bullets][org-bullets]] adds pretty bullets to org mode
