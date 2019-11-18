@@ -1,0 +1,5 @@
+# -*- mode: org; -*-
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_THEME: night
+#+REVEAL_HTML: ~/.dotfiles/org/setup-files/slideshow.css
+#+OPTIONS: toc:nil num:nil

@@ -8,6 +8,9 @@ This is my personal Emacs configuration file
 ** Icons
    When installing =all-the-icons= it will prompt for a font installation directory, pick whatever and then manually install the fonts it just downloaded
 
+** Cygwin
+   Projectile's =alien= indexing method requires some unix utilities, these are installed with the default Cygwin installation.
+   Install Cygwin with the default packages and add the cygwin =/bin= directory to your PATH
 
 * Init
 ** Package repositories
@@ -194,6 +197,11 @@ This is my personal Emacs configuration file
    #+BEGIN_SRC emacs-lisp
    (setq projectile-switch-project-action 'neotree-projectile-action)
    #+END_SRC
+   
+   Force indexing method on all OSes to =alien=
+   #+BEGIN_SRC emacs-lisp
+   (setq projectile-indexing-method 'alien)
+   #+END_SRC
 
 ** Magit
 *** Packages
@@ -306,6 +314,12 @@ This is my personal Emacs configuration file
    (define-key evil-normal-state-map (kbd "C-x l") 'next-buffer) 
    #+END_SRC
    
+* Languages
+** C#
+   #+BEGIN_SRC emacs-lisp
+   (use-package csharp-mode :ensure t)
+   #+END_SRC
+
 * File formats
 ** Org
 *** Evil
@@ -365,6 +379,21 @@ This is my personal Emacs configuration file
    (use-package htmlize :ensure t)
    #+END_SRC
 
+**** Reveal.js
+     Create nice looking slideshows with reveal.js
+     #+BEGIN_SRC emacs-lisp
+     (use-package ox-reveal :ensure t)
+     #+END_SRC
+     
+     Then use this in the head of the org file to start:
+     #+BEGIN_SRC
+     #+SETUPFILE: ~/.dotfiles/org/setup-files/reveal-slideshow.setup
+     #+BEGIN_EXPORT html
+     <style>
+       // Custom styles in here
+     </style>
+     #+END_EXPORT
+     #+END_SRC
 *** Keymap
     Setup a Org mode hydra
 
