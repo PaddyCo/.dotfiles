@@ -323,7 +323,7 @@ This is my personal Emacs configuration file
    (use-package csharp-mode :ensure t)
    #+END_SRC
 
-* File formats
+* Templates
 ** Org
 *** Evil
   #+BEGIN_SRC emacs-lisp
@@ -441,6 +441,14 @@ This is my personal Emacs configuration file
      :init (setq markdown-command "multimarkdown"))
    #+END_SRC
 
+** Dockerfile
+   #+BEGIN_SRC emacs-lisp
+   (use-package dockerfile-mode
+     :ensure t
+     :commands (dockerfile-mode)
+     :mode (("Dockerfile\\'" . dockerfile-mode)))
+   #+END_SRC
+   
 * Keymap
   Creating the leader hydra
 
